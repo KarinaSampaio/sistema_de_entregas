@@ -1,0 +1,52 @@
+No prompt de comando_seguindo o passo a passo:
+
+1º etapa
+
+mkdir projeto_entregas 
+
+2º etapa
+
+cd projeto_entregas 
+
+3º etapa
+
+python -m venv .venv
+
+4º etapa
+
+.venv\Scripts\activate.bat
+
+5º etapa
+
+Instale o Flask e o conector MySQL para Python:
+Com o ambiente virtual ativado (você saberá que está ativado porque o nome do ambiente .venv aparecerá no início da linha no terminal), execute o comando:
+
+pip install flask mysql-connector-python
+
+6º Crie o Arquivo requirements.txt:
+Você pode usar um editor de texto (como o Bloco de Notas no Windows, TextEdit no macOS ou qualquer editor de sua preferência) para criar um arquivo chamado requirements.txt no diretório projeto_entregas.
+Dentro do arquivo, adicione as linhas:
+
+flask
+mysql-connector-python
+
+ara adicionar um novo usuário, você pode usar uma ferramenta como Postman ou curl para enviar uma requisição POST para http://localhost:5000/usuario com um corpo JSON contendo o nome, email e senha do novo usuário.
+
+Exemplo de corpo da requisição usando curl:
+
+prompt de comando: 
+
+curl -X POST -H "Content-Type: application/json" -d "{\"nome\": \"Teste Usuário\", \"email\": \"teste@exemplo.com\", \"senha\": \"12345\"}" http://localhost:5000/usuario
+
+Para listar todos os usuários, basta acessar http://localhost:5000/usuarios no seu navegador ou usar uma ferramenta como curl para fazer uma requisição GET:
+
+prompt de comando: 
+
+curl http://localhost:5000/usuarios
+
+
+Para adicionar um novo local, você precisará enviar uma requisição POST contendo um JSON com o nome e o endereço do local. Isso pode ser feito usando o Postman ou curl:
+
+prompt de comando 
+
+curl -X POST -H "Content-Type: application/json" -d "{\"nome\": \"Local Teste\", \"end
