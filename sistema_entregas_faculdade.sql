@@ -1,4 +1,5 @@
 CREATE DATABASE sistema_entregas;
+
 USE sistema_entregas;
 
 CREATE TABLE usuarios (
@@ -17,17 +18,23 @@ CREATE TABLE locais (
 INSERT INTO usuarios (nome, email, senha) VALUES
 ('Karina Sampaio', 'karinasampaio13@gmail.com', 'senha1234'),
 ('Izabel Sampaio', 'izabel-sampaio@hotmail.com', 'senhabel123'),
-('Beyonce Knowles', 'beyoncediva@gmail,com', 'senhacrazyinlove123'),
-('Taylor Swift', 'taylornation@gmail,com', 'senhatheerastour'),
+('Beyonce Knowles', 'beyoncediva@gmail.com', 'senhacrazyinlove123'),
+('Taylor Swift', 'taylornation@gmail.com', 'senhatheerastour'),
 ('Lucas Montes', 'lucasmontes@mail.com', 'lucas123'),
 ('Ana Júlia', 'anajulia@mail.com', 'ana1234'),
 ('Carlos Eduardo', 'carloseduardo@mail.com', 'carlos123');
 
-INSERT INTO locais (id, nome, endereco) Values
-('1', 'Karina Sampaio', 'Rio de Janeiro Brasil'),
-('2', 'Izabel Sampio', 'Rio de Janeiro Brasil'),
-('3', 'Beyonce Knowles', 'Texas, EUA'),
-('4', 'Taylor Swift', 'Nova York, Eua'); 
+
+INSERT INTO locais (nome, endereco) VALUES
+('Karina Sampaio', 'Rio de Janeiro, Brasil'),
+('Izabel Sampaio', 'Rio de Janeiro, Brasil'),
+('Beyonce Knowles', 'Texas, EUA'),
+('Taylor Swift', 'Nova York, EUA'),
+('Lucas Montes', 'Recife, Brasil'),
+('Ana Júlia', 'São Paulo, Brasil'),
+('Carlos Eduardo', 'Belo Horizonte, Brasil');
+
+
 
 -- Criando tabela de veículos
 CREATE TABLE veiculos (
@@ -79,8 +86,10 @@ INSERT INTO entregas (id_usuario, id_local, id_veiculo, data_entrega, status) VA
 
 use sistema_entregas;
 
-SELECT * FROM status_entrega;
+SELECT * FROM usuarios;
 
+
+SELECT * FROM status_entrega;
 
 select *
 from usuarios
@@ -88,6 +97,24 @@ join locais on usuarios.nome=locais.nome;
 
 select nome, endereco
 from locais;
+
+SELECT *
+FROM entregas
+ORDER BY status;
+
+SELECT entregas.*, status_entrega.descricao
+FROM entregas
+JOIN status_entrega ON entregas.status = status_entrega.status
+ORDER BY status_entrega.descricao;
+
+
+
+
+
+
+
+
+
 
 
 
