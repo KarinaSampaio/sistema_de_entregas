@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Locais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Locais</h1>
+    <a href="{{ url_for('adicionar_local') }}">Adicionar Novo Local</a>
+    <ul>
+        {% for local in locais %}
+            <li>{{ local.nome }} - {{ local.endereco }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
