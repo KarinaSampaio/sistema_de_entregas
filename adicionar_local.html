@@ -1,0 +1,27 @@
+<!-- templates/adicionar_local.html --> 
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Seu Título Aqui</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Adicionar Local</h1>
+    <form method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
+        <input type="submit" value="Adicionar">
+        <form method="POST" action="/adicionar_local">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required>
+            <input type="submit" value="Adicionar">
+        </form>
+        
+</body>
+</html>
