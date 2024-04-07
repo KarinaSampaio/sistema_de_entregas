@@ -1,50 +1,42 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template, redirect, url_for, jsonify
 import mysql.connector
-from mysql.connector import Error
 
 app = Flask(__name__)
 
 def get_db_connection():
-    try:
-        conn = mysql.connector.connect(
-            host='localhost',
-            database='sistema_entregas',
-            user='host',
-            password='Sua_senha'
-        )
-        if conn.is_connected():
-            return conn
-    except Error as e:
-        print(e)
+    return mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='Somos@2021',
+        database='sistema_entregas'
+    )
 
-@app.route('/usuarios', methods=['GET'])
-def listar_usuarios():
+@app.route('/locais', methods=['GET'])
+def listar_locais():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM usuarios")
-    usuarios = cursor.fetchall()
+    cursor.execute("SELECT nome, endereco FROM locais")
+    locais = cursor.fetchall()
     cursor.close()
     conn.close()
-    return jsonify(usuarios)
+    return render_template('listar_locais.html', locais=locais)
 
-@app.route('/usuario', methods=['POST'])
-def adicionar_usuario():
-    data = request.get_json()
-    nome = data['nome']
-    email = data['email']
-    senha = data['senha']
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    try:
-        cursor.execute("INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)", (nome, email, senha))
-        conn.commit()
-        response = {'status': 'Usuário adicionado com sucesso!'}
-        return jsonify(response), 201
-    except mysql.connector.Error as error:
-        return jsonify({'status': 'Erro ao adicionar usuário', 'mensagem': str(error)}), 500
-    finally:
-        cursor.close()
-        conn.close()
+@app.route('/adicionar_local', methods=['GET', 'POST'])
+def adicionar_local():
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        endereco = request.form.get('endereco')
+        if nome and endereco:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO locais (nome, endereco) VALUES (%s, %s)", (nome, endereco))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            return redirect(url_for('listar_locais'))
+        else:
+            return "Nome e endereço são obrigatórios!", 400
+    return render_template('adicionar_local.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
